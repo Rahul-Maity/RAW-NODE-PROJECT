@@ -7,10 +7,15 @@ Author:Rahul Maity
 const http = require('http');
 const {handleReqRes}=require('./helper/handleReqRes')
 const environment = require('./helper/environt');
+const data=require('./lib/data')
 const app = {};
 app.config = {
     port: 3000,
 };
+//@Todo: delete after
+data.create('test', 'newfile', { 'name': 'India', 'language': 'Benagali' }, (err) => {
+    console.log('err was ', err);
+})
 app.createServer = () => {
     const server = http.createServer(app.handleReqRes);
     server.listen(environment.port, () => {
