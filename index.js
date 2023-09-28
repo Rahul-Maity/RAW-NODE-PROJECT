@@ -13,8 +13,17 @@ app.config = {
     port: 3000,
 };
 //@Todo: delete after
-data.create('test', 'newfile', { 'name': 'India', 'language': 'Benagali' }, (err) => {
-    console.log('err was ', err);
+// data.create('test', 'newfile', { 'name': 'India', 'language': 'Benagali' }, (err) => {
+//     console.log('err was ', err);
+// })
+// data.read('test', 'newfile', (err, result) => {
+    //     console.log(err, result);
+    // })
+    // data.update('test', 'newfile', { 'name': 'england', 'language': 'English' }, (err) => {
+    //     console.log('err was ', err);
+    // })
+data.delete('test', 'newfile', (err) => {
+    console.log(err);
 })
 app.createServer = () => {
     const server = http.createServer(app.handleReqRes);
