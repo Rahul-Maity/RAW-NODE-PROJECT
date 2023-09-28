@@ -4,7 +4,8 @@ Description:A restful api to monitoring up or down time of user - defined links
 Author:Rahul Maity
 */
 
-const http=require('http')
+const http = require('http');
+const {handleReqRes}=require('./helper/handleReqRes')
 const app = {};
 app.config = {
     port: 3000,
@@ -15,7 +16,5 @@ app.createServer = () => {
         console.log(`listning to the port ${app.config.port}`)
     })
 }
-app.handleReqRes = (req, res) => {
-    res.end('Hello programmers');
-}
+app.handleReqRes = handleReqRes;
 app.createServer();
