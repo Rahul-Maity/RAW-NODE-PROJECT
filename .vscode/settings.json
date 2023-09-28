@@ -1,0 +1,14 @@
+{
+    "editor.letterSpacing": 0.4,
+    "editor.fontWeight":"577",
+    "editor.fontFamily": "menlo,cascadia Code, Consolas, Liberation Mono, monospace",
+   
+   
+    "editor.fontSize": 14.79,
+    // "editor.lineDecorationsWidth": 10,
+    "editor.fontLigatures": true,
+    "editor.lineHeight": 1.4,
+    "editor.codeLens": true,
+    "editor.colorDecorators": true,
+   
+}
