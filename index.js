@@ -22,9 +22,9 @@ app.config = {
     // data.update('test', 'newfile', { 'name': 'england', 'language': 'English' }, (err) => {
     //     console.log('err was ', err);
     // })
-data.delete('test', 'newfile', (err) => {
-    console.log(err);
-})
+// data.delete('test', 'newfile', (err) => {
+//     console.log(err);
+// })
 app.createServer = () => {
     const server = http.createServer(app.handleReqRes);
     server.listen(environment.port, () => {
