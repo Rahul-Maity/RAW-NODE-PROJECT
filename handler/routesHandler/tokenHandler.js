@@ -53,7 +53,29 @@ handler._tokens.post = (requestProperties, callback) => {
 };
 
 handler._tokens.get = (requestProperties, callback) => {
- 
+    const id =
+    typeof requestProperties.queryStringObject.id === "string" &&
+    requestProperties.queryStringObject.id.trim().length === 20
+      ? requestProperties.queryStringObject.id
+      : false;
+
+  if (id) {
+    data.read("tokens", id, (err, tokenData) => {
+      const token = { ...parseJson(tokenData) }; //immutable copy
+      if (!err && token) {
+     
+        callback(200, token);
+      } else {
+        callback(404, {
+          error: "requested token was not found",
+        });
+      }
+    });
+  } else {
+    callback(404, {
+      error: "requested token was not found",
+    });
+  }
 };
 handler._tokens.put = (requestProperties, callback) => {
   
