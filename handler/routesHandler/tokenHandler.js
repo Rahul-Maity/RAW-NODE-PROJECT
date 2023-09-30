@@ -120,7 +120,39 @@ handler._tokens.put = (requestProperties, callback) => {
 };
 
 handler._tokens.delete=(requestProperties, callback)=>{
-   
+    const id =
+    typeof requestProperties.queryStringObject.id === 'string' &&
+    requestProperties.queryStringObject.id.trim().length === 20
+        ? requestProperties.queryStringObject.id
+        : false;
+    if (id) {
+        data.read('tokens', id, (err1, tokenData) => {
+            if (!err1 && tokenData) {
+                data.delete('tokens', id, (err2) => {
+                    if (!err2) {
+                        callback(200, {
+                            message: 'deleted successfully'
+                        });
+                    }
+                    else {
+                        callback(500, {
+                            error: 'There was a server side error'
+                        });
+                    }
+                });
+            }
+            else {
+                callback(500, {
+                    error: 'There was a server side error'
+                });
+            }
+        });
+    }
+    else {
+        callback(400, {
+            error: 'There was a problem iin your request'
+        });
+    }
 };
 
 module.exports = handler;
