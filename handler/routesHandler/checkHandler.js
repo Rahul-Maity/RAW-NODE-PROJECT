@@ -127,7 +127,44 @@ handler._checks.post = (requestProperties, callback) => {
   }
 };
 
-handler._checks.get = (requestProperties, callback) => {};
+handler._checks.get = (requestProperties, callback) => {
+    const id =
+    typeof requestProperties.queryStringObject.id === "string" &&
+    requestProperties.queryStringObject.id.trim().length === 20
+      ? requestProperties.queryStringObject.id
+            : false;
+    if (id) {
+        data.read('checks', id, (err1, checkData) => {
+            if (!err1 && checkData) {
+                const token =
+                typeof requestProperties.headersObject.token === "string" &&
+                requestProperties.headersObject.token.trim().length === 20
+                  ? requestProperties.headersObject.token
+                        : false;
+                tokenHandler._tokens.verify(token, parseJson(checkData).userPhone, (istokenValid) => {
+                    if (istokenValid) {
+                        callback(200,parseJson(checkData)); 
+                    }
+                    else {
+                        callback(403, {
+                            error: "Authentication error",
+                          }); 
+                    }
+                })
+            }
+            else {
+                callback(500, {
+                    error: "You have a problem in your request",
+                  }); 
+            }
+        })
+    }
+    else {
+        callback(400, {
+            error: "You have a problem in your request",
+          });
+    }
+};
 handler._checks.put = (requestProperties, callback) => {};
 
 handler._checks.delete = (requestProperties, callback) => {};
